@@ -1,3 +1,14 @@
+<?php session_start();
+if (isset($_POST['logname'])){
+$_SESSION['logname']=$_POST['logname'];
+header('Location: index.php');
+exit; 
+}
+if (isset($SESSION['logname'])){
+    header('Location: index.php');
+    exit; 
+    }
+?>
 <?php require 'inc/head.php'; ?>
 <div class="container" style="margin-top:40px">
     <div class="row">
@@ -7,7 +18,7 @@
                     <strong> Sign in to continue</strong>
                 </div>
                 <div class="panel-body">
-                    <form role="form" action="#" method="POST">
+                    <form role="form" action="login.php" method="POST">
                         <fieldset>
                             <div class="row">
                                 <div class="center-block">
@@ -23,7 +34,7 @@
                                             <span class="input-group-addon">
                                               <i class="glyphicon glyphicon-user"></i>
                                             </span>
-                                            <input class="form-control" placeholder="Username" name="loginname"
+                                            <input class="form-control" placeholder="Username" name="logname"
                                                    type="text" autofocus>
                                         </div>
                                     </div>

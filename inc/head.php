@@ -1,3 +1,18 @@
+<?php if (isset($_GET["destroy"]))
+{
+    require_once 'inc/data/products.php';
+    session_destroy();
+    foreach ($catalog as $id => $cookie) 
+            { 
+                $cookieName=$id;
+                //var_dump($cookieName);
+                if(isset($_COOKIE[$cookieName])) {
+                    setcookie($cookieName,'',time()-1);
+                }
+            }
+    header("Location: login.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,6 +63,20 @@
         </div><!-- /.container-fluid -->
     </nav>
     <div class="container-fluid text-right">
-        <strong>Hello Wilder !</strong>
-    </div>
+            <strong>
+                <?php 
+                    if (isset($_SESSION['logname'])) 
+                        {
+                            echo 'Hello ' . $_SESSION['logname'] . ' !';
+                        } 
+                        else 
+                        {
+                            echo 'Hello Wilder !';
+                        } 
+                ?>
+                <a href="?destroy=true" class="btn btn-primary">
+                <span class="glyphicon" aria-hidden="true"></span> Logout 
+                </a>
+            </strong>
+        </div>
 </header>
